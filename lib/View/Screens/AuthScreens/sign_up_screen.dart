@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:learn_nova/Utils/AppColors/app_colors.dart';
 import 'package:learn_nova/Utils/AppString/app_string.dart';
 import 'package:learn_nova/View/Screens/AuthScreens/sign_up_screen.dart';
+import 'package:learn_nova/View/Screens/Bottom_Nav_Screens/main_bottom_nav_screen.dart';
+import 'package:learn_nova/View/Screens/profile_survey_screeen.dart';
 import 'package:learn_nova/View/Widget/app_bar.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -66,11 +68,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     SizedBox(height: 15),
 
                     ElevatedButton(onPressed: () {
+                      onTapSignUpButton();
                     }, child: Text(AppString.signUuText)),
 
                     SizedBox(height: 10),
 
-                    buildContinueWithGoogleSection(context),
 
                     buildRichText(),
                   ],
@@ -131,14 +133,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
               width: 60,
               color: selectedText == "STUDENT"
                   ? AppColors.themeColor
-                  : Colors.grey,
+                  :AppColors.dividerColor,
             ),
             Container(
               height: 2,
               width: 60,
               color: selectedText == "TEACHER"
                   ? AppColors.themeColor
-                  : Colors.grey,
+                  : AppColors.dividerColor,
             ),
           ],
         ),
@@ -197,29 +199,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
-  Container buildContinueWithGoogleSection(BuildContext context) {
-    return Container(
-      height: 56,
-      width: 390,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
-        color: AppColors.googleButtonColor,
-      ),
 
-      child: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(Icons.circle),
-            Text(
-              "Login With Google",
-              style: Theme.of(context).textTheme.bodySmall,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
 
   RichText buildRichText() {
     return RichText(
@@ -241,6 +221,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
         ],
       ),
     );
+  }
+
+  void onTapSignUpButton(){
+    Navigator.push(context, MaterialPageRoute(builder: (context)=>SurveyScreenContent()));
   }
   
 

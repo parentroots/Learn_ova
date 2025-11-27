@@ -132,14 +132,14 @@ class _LoginScreenState extends State<LoginScreen> {
               width: 60,
               color: selectedText == "STUDENT"
                   ? AppColors.themeColor
-                  : Colors.grey,
+                  : AppColors.dividerColor,
             ),
             Container(
               height: 2,
               width: 60,
               color: selectedText == "TEACHER"
                   ? AppColors.themeColor
-                  : Colors.grey,
+                  : AppColors.dividerColor,
             ),
           ],
         ),
