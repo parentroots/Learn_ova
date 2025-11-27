@@ -5,7 +5,6 @@ import 'package:learn_nova/View/Screens/Bottom_Nav_Screens/vocabulary_screen.dar
 import 'package:learn_nova/View/Screens/Bottom_Nav_Screens/profile_screen.dart';
 import 'package:learn_nova/View/Screens/Bottom_Nav_Screens/videos_screen.dart';
 
-
 class MainBottomNavScreen extends StatefulWidget {
   const MainBottomNavScreen({super.key});
 
@@ -22,15 +21,13 @@ class _MainBottomNavScreenState extends State<MainBottomNavScreen> {
     });
   }
 
-  List<Widget>_screens=[
-
+  final List<Widget> _screens = [
     HomeScreen(),
     VideosScreen(),
     LightBulbScreen(),
     BookScreen(),
-    ProfileScreen()
+    ProfileScreen(),
   ];
-
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +40,6 @@ class _MainBottomNavScreenState extends State<MainBottomNavScreen> {
             topLeft: Radius.circular(15.0),
             topRight: Radius.circular(15.0),
           ),
-
         ),
         child: BottomNavigationBar(
           items: <BottomNavigationBarItem>[
@@ -60,10 +56,7 @@ class _MainBottomNavScreenState extends State<MainBottomNavScreen> {
               icon: Icon(Icons.lightbulb_outline),
               label: '',
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.book_outlined),
-              label: '',
-            ),
+            BottomNavigationBarItem(icon: Icon(Icons.book_outlined), label: ''),
             BottomNavigationBarItem(
               icon: Icon(Icons.person_outline),
               label: '',
@@ -83,13 +76,10 @@ class _MainBottomNavScreenState extends State<MainBottomNavScreen> {
           showSelectedLabels: false,
           showUnselectedLabels: false,
 
-
           selectedIconTheme: IconThemeData(size: 24),
-          unselectedIconTheme:  IconThemeData(size: 24),
-
+          unselectedIconTheme: IconThemeData(size: 24),
         ),
       ),
     );
   }
 }
-

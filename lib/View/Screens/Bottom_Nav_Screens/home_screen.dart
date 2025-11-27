@@ -12,9 +12,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
   String selectedText = "TRENDING";
-
 
   List<String> tabList = [
     'New',
@@ -25,46 +23,53 @@ class _HomeScreenState extends State<HomeScreen> {
     'history',
     'geography',
     'english',
-    'physics'
+    'physics',
   ];
 
-
   final List<Map<String, dynamic>> gridItems = const [
-    {'title': 'Vocabulary 101',
+    {
+      'title': 'Vocabulary 101',
       'author': 'Jessica Roy',
       'heightRatio': 250.0,
-      'color': Colors.blue
+      'color': Colors.blue,
     },
 
-    {'title': 'English Listening',
+    {
+      'title': 'English Listening',
       'author': 'Jessica Roy',
       'heightRatio': 150.0,
-      'color': Colors.red
+      'color': Colors.red,
     },
-    {'title': 'Trigonometry Basic',
+    {
+      'title': 'Trigonometry Basic',
       'author': 'Jessica Roy',
       'heightRatio': 180.0,
-      'color': Colors.green
+      'color': Colors.green,
     },
-    {'title': 'Geometry Advance',
+    {
+      'title': 'Geometry Advance',
       'author': 'Jessica Roy',
       'heightRatio': 220.0,
-      'color': Colors.orange
+      'color': Colors.orange,
     },
-    {'title': 'History of Physics',
+    {
+      'title': 'History of Physics',
       'author': 'Jane Doe',
       'heightRatio': 170.0,
-      'color': Colors.purple
+      'color': Colors.purple,
     },
-    {'title': 'Calculus II',
+    {
+      'title': 'Calculus II',
       'author': 'John Smith',
       'heightRatio': 300.0,
-      'color': Colors.teal
+      'color': Colors.teal,
     },
-    {'title': 'Advanced Chemistry',
+    {
+      'title': 'Advanced Chemistry',
       'author': 'John Smith',
       'heightRatio': 200.0,
-      'color': Colors.pink},
+      'color': Colors.pink,
+    },
   ];
 
   @override
@@ -76,7 +81,6 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -84,17 +88,21 @@ class _HomeScreenState extends State<HomeScreen> {
                     "Learn Thought watching reels",
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
-                  IconButton(onPressed: () {
-                    Navigator.push(context,MaterialPageRoute(builder: (context)=>SearchScreen()));
-
-                  }, icon: const Icon(Icons.search)),
+                  IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => SearchScreen()),
+                      );
+                    },
+                    icon: const Icon(Icons.search),
+                  ),
                 ],
               ),
               const SizedBox(height: 12),
 
               buildUserRoleSection(),
               const SizedBox(height: 10),
-
 
               buildHorizontalListView(),
               const SizedBox(height: 10),
@@ -113,7 +121,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       imageUrl: 'assets/images/image${index + 1}.png',
                       title: item['title'],
                       author: item['author'],
-                        height: 200
+                      height: 200,
                     );
                   },
                 ),
@@ -125,8 +133,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-
-
   Widget _buildGridTile({
     required String imageUrl,
     required String title,
@@ -135,9 +141,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }) {
     return Card(
       clipBehavior: Clip.antiAlias,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12.0),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
       child: Container(
         height: height,
         decoration: BoxDecoration(
@@ -152,7 +156,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 imageUrl,
                 fit: BoxFit.cover,
 
-                errorBuilder: (context, error, stackTrace) => Center(child: Text("Image $title")),
+                errorBuilder: (context, error, stackTrace) =>
+                    Center(child: Text("Image $title")),
               ),
             ),
 
@@ -164,7 +169,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   Text(
                     title,
-                    style:TextStyle(
+                    style: TextStyle(
                       color: Colors.white,
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
@@ -172,12 +177,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   Row(
                     children: [
-                      SizedBox(
-                        height:30,
-                          width: 30,
-                          child: CircleAvatar()),
+                      SizedBox(height: 30, width: 30, child: CircleAvatar()),
 
-                      SizedBox(width: 10,),
+                      SizedBox(width: 10),
                       Text(
                         author,
                         style: TextStyle(
@@ -196,7 +198,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-
   Widget buildHorizontalListView() {
     return SizedBox(
       height: 40,
@@ -206,19 +207,18 @@ class _HomeScreenState extends State<HomeScreen> {
           itemCount: tabList.length,
           itemBuilder: (context, index) {
             final data = tabList[index];
-        
+
             return Container(
               margin: EdgeInsets.only(right: 8),
               padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(20),
-
               ),
               child: Center(
                 child: Text(
                   data,
-                  style: TextStyle(color:Colors.black54, fontSize: 14),
+                  style: TextStyle(color: Colors.black54, fontSize: 14),
                 ),
               ),
             );
@@ -228,7 +228,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-
   Column buildUserRoleSection() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -236,17 +235,15 @@ class _HomeScreenState extends State<HomeScreen> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-
             _buildTabItem("TRENDING", "Trending"),
             _buildTabItem("NEW", "New"),
             _buildTabItem("FOLLOWING", "Following"),
           ],
         ),
-         SizedBox(height: 4),
+        SizedBox(height: 4),
 
         Row(
           children: [
-
             _buildIndicatorContainer("TRENDING"),
             _buildIndicatorContainer("NEW"),
             _buildIndicatorContainer("FOLLOWING"),
@@ -273,7 +270,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 color: selectedText == value
                     ? AppColors.themeColor
                     : AppColors.blackColor,
-                fontWeight: selectedText == value ? FontWeight.bold : FontWeight.normal,
+                fontWeight: selectedText == value
+                    ? FontWeight.bold
+                    : FontWeight.normal,
               ),
             ),
           ),
@@ -281,7 +280,6 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
-
 
   Widget _buildIndicatorContainer(String value) {
     return Expanded(

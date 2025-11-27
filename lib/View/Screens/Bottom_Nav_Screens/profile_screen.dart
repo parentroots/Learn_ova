@@ -1,28 +1,6 @@
 import 'package:flutter/material.dart';
-
 import '../../Widget/course_card.dart';
 import '../../Widget/status_card.dart';
-
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Profile Screen',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        scaffoldBackgroundColor: const Color(0xFFF0F2F5),
-        useMaterial3: true,
-      ),
-      home: const ProfileScreen(),
-    );
-  }
-}
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -96,10 +74,8 @@ class ProfileHeader extends StatelessWidget {
 
         const CircleAvatar(
           radius: 40,
-          backgroundImage: AssetImage('assets/jessica_roy_avatar.png'),
+          backgroundImage: AssetImage('assets/images/image5.png'),
           backgroundColor: Colors.grey,
-
-          child: Icon(Icons.person, size: 50, color: Colors.white),
         ),
 
         const SizedBox(height: 10),
@@ -119,7 +95,3 @@ class ProfileHeader extends StatelessWidget {
     );
   }
 }
-
-
-
-
