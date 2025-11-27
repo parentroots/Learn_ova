@@ -23,8 +23,15 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-         Icon(Icons.person,color: Colors.white60,),
-         Icon(Icons.person,color: Colors.white60,),
+         SizedBox(
+           height: 150,
+             width: 150,
+             child: Image.asset('assets/Icons/icon.png')),
+         Text(AppString.appName,style: TextStyle(
+           color: Colors.white,
+           fontSize: 24,
+           fontWeight: FontWeight.w700
+         ),)
           // Text(AppString.appName)
 
 

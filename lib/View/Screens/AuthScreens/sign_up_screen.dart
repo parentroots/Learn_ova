@@ -1,6 +1,5 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:learn_nova/Core/AppRoute/app_route.dart';
 import 'package:learn_nova/Utils/AppColors/app_colors.dart';
 import 'package:learn_nova/Utils/AppString/app_string.dart';
 import 'package:learn_nova/View/Screens/profile_survey_screeen.dart';
@@ -15,8 +14,12 @@ class SignUpScreen extends StatefulWidget {
   State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
+
 class _SignUpScreenState extends State<SignUpScreen> {
   String selectedText = "STUDENT";
+
+  bool isShowPassword=true;
+  bool isConfirmShowPassword=true;
 
   @override
   Widget build(BuildContext context) {
@@ -155,7 +158,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       elevation: 0,
       color: Colors.white,
       child: TextFormField(
-        obscureText: obscure,
+        obscureText: isShowPassword,
         decoration: InputDecoration(
           hintText: hint,
           hintStyle: const TextStyle(fontSize: 12),
