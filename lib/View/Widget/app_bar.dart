@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:learn_nova/Utils/AppColors/app_colors.dart';
+import 'package:learn_nova/Utils/AppString/app_string.dart';
 
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -22,7 +23,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-         Icon(Icons.person,color: Colors.white60,)
+         Icon(Icons.person,color: Colors.white60,),
+         Icon(Icons.person,color: Colors.white60,),
+          // Text(AppString.appName)
 
 
         ],

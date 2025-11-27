@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:learn_nova/Core/AppRoute/app_route.dart';
 import 'package:learn_nova/Utils/AppColors/app_colors.dart';
-
+import 'package:get/get.dart';
+import 'package:learn_nova/View/Screens/Bottom_Nav_Screens/explanation_screen.dart';
 class LightBulbScreen extends StatefulWidget {
   const LightBulbScreen({super.key});
 
@@ -147,7 +149,10 @@ class _LightBulbScreenState extends State<LightBulbScreen> {
 
               SizedBox(height: 16),
 
-              ElevatedButton(onPressed: () {}, child: Text("Next")),
+              ElevatedButton(onPressed: () {
+                Get.to(()=>ExplanationScreen());
+
+              }, child: Text("Next")),
             ],
           ),
         ),

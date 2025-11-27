@@ -1,10 +1,12 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:learn_nova/Core/AppRoute/app_route.dart';
 import 'package:learn_nova/Utils/AppColors/app_colors.dart';
 import 'package:learn_nova/Utils/AppString/app_string.dart';
 import 'package:learn_nova/View/Screens/profile_survey_screeen.dart';
 import 'package:learn_nova/View/Screens/AuthScreens/login_screen.dart';
 import 'package:learn_nova/View/Widget/app_bar.dart';
+import 'package:get/get.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -201,9 +203,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   // SIGNUP BUTTON ACTION
   // -------------------------------
   void onTapSignUpButton() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => SurveyScreenContent()),
-    );
+    Get.to(() => SurveyScreenContent());
+
   }
 }

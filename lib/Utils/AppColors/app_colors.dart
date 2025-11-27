@@ -7,6 +7,8 @@ class AppColors {
   static const Color customButtonColor=Color(0xFF1153A0);
   static const Color googleButtonColor=Color(0xFFf1f4f8);
   static const Color dividerColor=Color(0xFFE5EAF0);
+  static const Color explainCardColor=Color(0xFFF6FAFF);
+  static const Color answereCardColor=Color(0xFFDBF1FF);
 
 
 }

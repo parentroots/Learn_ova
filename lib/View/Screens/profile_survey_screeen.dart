@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:learn_nova/Core/AppRoute/app_route.dart';
 import 'package:learn_nova/View/Screens/Bottom_Nav_Screens/main_bottom_nav_screen.dart';
+import 'package:get/get.dart';
 
 class FieldLabel extends StatelessWidget {
   final String text;
@@ -227,6 +229,7 @@ class _SurveyScreenContentState extends State<SurveyScreenContent> {
   }
   
   void onTapGetStartButton(){
-    Navigator.push(context, MaterialPageRoute(builder: (context)=>MainBottomNavScreen()));
+    Get.to(() =>MainBottomNavScreen());
+
   }
 }

@@ -246,7 +246,7 @@ class _HomeScreenState extends State<HomeScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             _buildTabItem("TRENDING", "Trending"),
-            _buildTabItem("NEW", "New"),
+            _buildTabItem("NEW", "中文"),
             _buildTabItem("FOLLOWING", "Following"),
           ],
         ),

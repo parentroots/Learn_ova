@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:learn_nova/Utils/AppColors/app_colors.dart';
 import '../View/Screens/AuthScreens/login_screen.dart';
+import 'package:get/get.dart';
 
 class LearnNovaApp extends StatelessWidget {
   const LearnNovaApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       home: LoginScreen(),
       theme: ThemeData(

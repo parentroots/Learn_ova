@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:learn_nova/Utils/AppString/app_string.dart';
 
 class VideosScreen extends StatefulWidget {
   const VideosScreen({super.key});
@@ -119,7 +120,7 @@ class _VideosScreenState extends State<VideosScreen> {
                 const SizedBox(height: 10),
 
                 const Text(
-                  "Start Learning Vocabulary Today!",
+                  AppString.StartlearningVocabularyToday,
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
@@ -128,7 +129,7 @@ class _VideosScreenState extends State<VideosScreen> {
                 ),
 
                 const Text(
-                  "So what is the necessary to learn vocabulary in today world. Everyone",
+                  AppString.sowhatisthenecessarytolearnvocabularyintodayworldEveryone,
                   style: TextStyle(
                     overflow: TextOverflow.ellipsis,
                     color: Colors.white70,

@@ -1,9 +1,12 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:learn_nova/Core/AppRoute/app_route.dart';
+import 'package:learn_nova/Core/Controllers/login_controller.dart';
 import 'package:learn_nova/Utils/AppColors/app_colors.dart';
 import 'package:learn_nova/Utils/AppString/app_string.dart';
 import 'package:learn_nova/View/Screens/AuthScreens/sign_up_screen.dart';
 import 'package:learn_nova/View/Widget/app_bar.dart';
+import 'package:get/get.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -15,87 +18,93 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   String selectedText = "STUDENT";
 
+  bool isShowPassword=true;
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const CustomAppBar(),
+    return Builder(
+      builder: (context) {
+        return Scaffold(
+          appBar: const CustomAppBar(),
 
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const SizedBox(height: 40),
+          body: SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const SizedBox(height: 40),
 
-            /// Login Title
-            Text(
-              AppString.loginText,
-              style: TextStyle(
-                color: AppColors.blackColor,
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-
-            const SizedBox(height: 20),
-
-            /// Student / Teacher Switcher
-            buildUserRoleSection(),
-
-            const SizedBox(height: 25),
-
-            /// Input Fields
-            buildInputSection(context),
-
-            const SizedBox(height: 10),
-
-            /// Forgot Password
-            Align(
-              alignment: Alignment.centerRight,
-              child: Text(
-                AppString.forgotPasswordText,
-                style: TextStyle(
-                  color: AppColors.forgotTextColor,
-                  fontSize: 12,
-                ),
-              ),
-            ),
-
-            const SizedBox(height: 20),
-
-            /// Login Button
-            SizedBox(
-              width: double.infinity,
-              height: 48,
-              child: ElevatedButton(
-                onPressed: moveToSignUpScreen,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.themeColor,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
+                /// Login Title
+                Text(
+                  AppString.loginText,
+                  style: TextStyle(
+                    color: AppColors.blackColor,
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-                child: Text(
-                  AppString.loginText,
-                  style: const TextStyle(fontSize: 16, color: Colors.white),
+
+                const SizedBox(height: 20),
+
+                /// Student / Teacher Switcher
+                buildUserRoleSection(),
+
+                const SizedBox(height: 25),
+
+                /// Input Fields
+                buildInputSection(context),
+
+                const SizedBox(height: 10),
+
+                /// Forgot Password
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: Text(
+                    AppString.forgotPasswordText,
+                    style: TextStyle(
+                      color: AppColors.forgotTextColor,
+                      fontSize: 12,
+                    ),
+                  ),
                 ),
-              ),
+
+                const SizedBox(height: 20),
+
+                /// Login Button
+                SizedBox(
+                  width: double.infinity,
+                  height: 48,
+                  child: ElevatedButton(
+                    onPressed: moveToSignUpScreen,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.themeColor,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    child: Text(
+                      AppString.loginText,
+                      style: const TextStyle(fontSize: 16, color: Colors.white),
+                    ),
+                  ),
+                ),
+
+                const SizedBox(height: 20),
+
+                /// Google Login
+                buildContinueWithGoogleSection(context),
+
+                const SizedBox(height: 20),
+
+                /// Create Account Text
+                buildRichText(),
+
+                const SizedBox(height: 30),
+              ],
             ),
-
-            const SizedBox(height: 20),
-
-            /// Google Login
-            buildContinueWithGoogleSection(context),
-
-            const SizedBox(height: 20),
-
-            /// Create Account Text
-            buildRichText(),
-
-            const SizedBox(height: 30),
-          ],
-        ),
-      ),
+          ),
+        );
+      }
     );
   }
 
@@ -205,8 +214,14 @@ class _LoginScreenState extends State<LoginScreen> {
 
         /// Password Field
         TextFormField(
-          obscureText: true,
+          obscureText: isShowPassword,
           decoration: InputDecoration(
+            suffixIcon: IconButton(onPressed: (){
+              isShowPassword=!isShowPassword;
+              setState(() {
+
+              });
+            }, icon: isShowPassword?Icon(Icons.visibility):Icon(Icons.visibility_off)),
             hintText: "••••••••",
             filled: true,
             fillColor: Colors.white,
@@ -274,9 +289,6 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void moveToSignUpScreen() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const SignUpScreen()),
-    );
+ Get.to(() => SignUpScreen());
   }
 }
