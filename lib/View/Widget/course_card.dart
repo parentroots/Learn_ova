@@ -67,7 +67,7 @@ class CourseCard extends StatelessWidget {
               const CircleAvatar(
                 radius: 15,
 
-                backgroundImage: AssetImage('assets/instructor_avatar.png'),
+                backgroundImage: AssetImage('assets/images/image4.png'),
                 backgroundColor: Colors.blueGrey,
               ),
               const SizedBox(width: 10),

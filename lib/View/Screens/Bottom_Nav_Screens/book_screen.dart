@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 
-class BookScreen extends StatefulWidget {
+class BookScreen extends StatelessWidget {
   const BookScreen({super.key});
 
   @override
-  State<BookScreen> createState() => _BookScreenState();
-}
-
-class _BookScreenState extends State<BookScreen> {
-  @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(title: Text("Book Screen"),   backgroundColor: Colors.white,),
+      body: SafeArea(child: Column(children: [])),
+    );
   }
 }

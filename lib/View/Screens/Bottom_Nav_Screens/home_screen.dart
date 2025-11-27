@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:learn_nova/View/Screens/Bottom_Nav_Screens/search_screen.dart';
 
-import '../../../Utils/AppColors/app_colors.dart';
-
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -33,7 +31,6 @@ class _HomeScreenState extends State<HomeScreen> {
       'heightRatio': 250.0,
       'color': Colors.blue,
     },
-
     {
       'title': 'English Listening',
       'author': 'Jessica Roy',
@@ -75,53 +72,57 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              /// Header
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Text(
-                    "Learn Thought watching reels",
+                    "Learn Through Watching Reels",
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                   IconButton(
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => SearchScreen()),
+                        MaterialPageRoute(builder: (_) => SearchScreen()),
                       );
                     },
                     icon: const Icon(Icons.search),
                   ),
                 ],
               ),
+
               const SizedBox(height: 12),
 
+              /// Top Tabs (Trending, New, Following)
               buildUserRoleSection(),
-              const SizedBox(height: 10),
+              const SizedBox(height: 16),
 
+              /// Horizontal Category List
               buildHorizontalListView(),
               const SizedBox(height: 10),
 
+              /// Masonry Grid
               Expanded(
                 child: MasonryGridView.count(
                   crossAxisCount: 2,
-                  mainAxisSpacing: 2,
-                  crossAxisSpacing: 2,
+                  mainAxisSpacing: 8,
+                  crossAxisSpacing: 8,
                   itemCount: gridItems.length,
-
-                  itemBuilder: (BuildContext context, int index) {
+                  itemBuilder: (context, index) {
                     final item = gridItems[index];
-
                     return _buildGridTile(
-                      imageUrl: 'assets/images/image${index + 1}.png',
+                      imageUrl: 'assets/images/image4.png',
                       title: item['title'],
                       author: item['author'],
-                      height: 200,
+                      height: item['heightRatio'],
                     );
                   },
                 ),
@@ -133,6 +134,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  /// Grid Tile Widget
   Widget _buildGridTile({
     required String imageUrl,
     required String title,
@@ -141,45 +143,55 @@ class _HomeScreenState extends State<HomeScreen> {
   }) {
     return Card(
       clipBehavior: Clip.antiAlias,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: Container(
         height: height,
-        decoration: BoxDecoration(
-          color: Colors.blueGrey.shade100,
-          borderRadius: BorderRadius.circular(12.0),
-        ),
-
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
         child: Stack(
           children: [
+            /// Background image
             Positioned.fill(
               child: Image.asset(
                 imageUrl,
                 fit: BoxFit.cover,
-
-                errorBuilder: (context, error, stackTrace) =>
-                    Center(child: Text("Image $title")),
+                errorBuilder: (_, __, ___) =>
+                    Container(color: Colors.grey.shade300),
               ),
             ),
 
+            /// Gradient bottom area
+            Positioned.fill(
+              child: Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.center,
+                    end: Alignment.bottomCenter,
+                    colors: [Colors.transparent, Colors.black.withOpacity(0.7)],
+                  ),
+                ),
+              ),
+            ),
+
+            /// Text content
             Padding(
-              padding: EdgeInsets.all(12.0),
+              padding: EdgeInsets.all(12),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     title,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
+                  const SizedBox(height: 6),
                   Row(
                     children: [
-                      SizedBox(height: 30, width: 30, child: CircleAvatar()),
-
-                      SizedBox(width: 10),
+                      const CircleAvatar(radius: 12),
+                      const SizedBox(width: 8),
                       Text(
                         author,
                         style: TextStyle(
@@ -198,39 +210,37 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  /// Category Horizontal List
   Widget buildHorizontalListView() {
     return SizedBox(
       height: 40,
-      child: Expanded(
-        child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: tabList.length,
-          itemBuilder: (context, index) {
-            final data = tabList[index];
-
-            return Container(
-              margin: EdgeInsets.only(right: 8),
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(20),
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: tabList.length,
+        itemBuilder: (context, index) {
+          final data = tabList[index];
+          return Container(
+            margin: const EdgeInsets.only(right: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Center(
+              child: Text(
+                data,
+                style: const TextStyle(color: Colors.black54, fontSize: 14),
               ),
-              child: Center(
-                child: Text(
-                  data,
-                  style: TextStyle(color: Colors.black54, fontSize: 14),
-                ),
-              ),
-            );
-          },
-        ),
+            ),
+          );
+        },
       ),
     );
   }
 
+  /// Top section (Trending / New / Following)
   Column buildUserRoleSection() {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -240,9 +250,9 @@ class _HomeScreenState extends State<HomeScreen> {
             _buildTabItem("FOLLOWING", "Following"),
           ],
         ),
-        SizedBox(height: 4),
-
+        const SizedBox(height: 4),
         Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             _buildIndicatorContainer("TRENDING"),
             _buildIndicatorContainer("NEW"),
@@ -253,42 +263,30 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildTabItem(String value, String label) {
-    return Expanded(
-      child: InkWell(
-        onTap: () {
-          setState(() {
-            selectedText = value;
-          });
-        },
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0),
-            child: Text(
-              label,
-              style: TextStyle(
-                color: selectedText == value
-                    ? AppColors.themeColor
-                    : AppColors.blackColor,
-                fontWeight: selectedText == value
-                    ? FontWeight.bold
-                    : FontWeight.normal,
-              ),
-            ),
-          ),
+  /// Tab Item
+  Widget _buildTabItem(String id, String label) {
+    return GestureDetector(
+      onTap: () => setState(() => selectedText = id),
+      child: Text(
+        label,
+        style: TextStyle(
+          fontSize: 16,
+          color: selectedText == id ? Colors.black : Colors.grey,
+          fontWeight: selectedText == id ? FontWeight.bold : FontWeight.normal,
         ),
       ),
     );
   }
 
-  Widget _buildIndicatorContainer(String value) {
-    return Expanded(
-      child: Container(
-        height: 2,
-
-        color: selectedText == value
-            ? AppColors.themeColor
-            : AppColors.dividerColor.withOpacity(0.3),
+  /// Tab Indicator
+  Widget _buildIndicatorContainer(String id) {
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 250),
+      height: 3,
+      width: 60,
+      decoration: BoxDecoration(
+        color: selectedText == id ? Colors.black : Colors.transparent,
+        borderRadius: BorderRadius.circular(4),
       ),
     );
   }

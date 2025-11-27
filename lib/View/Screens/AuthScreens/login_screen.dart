@@ -18,103 +18,120 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(),
+      appBar: const CustomAppBar(),
+
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SizedBox(height: 30),
-                  Align(
-                    alignment: Alignment.center,
-                    child: Text(AppString.loginText,
-                      style: TextStyle(
-                        color: AppColors.blackColor,
-                        fontSize: 18,
-                      ),
-                    ),
-                  ),
-                ],
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const SizedBox(height: 40),
+
+            /// Login Title
+            Text(
+              AppString.loginText,
+              style: TextStyle(
+                color: AppColors.blackColor,
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
               ),
+            ),
 
-              SizedBox(height: 10),
+            const SizedBox(height: 20),
 
-              buildUserRoleSection(),
+            /// Student / Teacher Switcher
+            buildUserRoleSection(),
 
-              buildInputSection(context),
+            const SizedBox(height: 25),
 
-              Align(
-                alignment: Alignment.center,
-                child: Column(
-                  children: [
+            /// Input Fields
+            buildInputSection(context),
 
-                    Align(
-                      alignment:Alignment.centerRight,
-                      child: Text(
-                        AppString.forgotPasswordText,
-                        textAlign: TextAlign.right,
-                        style: TextStyle(
-                          color: AppColors.forgotTextColor,
-                          fontSize: 12,
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 15),
+            const SizedBox(height: 10),
 
-                    ElevatedButton(onPressed: () {
-                      moveToSignUpScreen();
-                    }, child: Text(AppString.loginText)),
-
-                    SizedBox(height: 10),
-
-                    buildContinueWithGoogleSection(context),
-
-                    buildRichText(),
-                  ],
+            /// Forgot Password
+            Align(
+              alignment: Alignment.centerRight,
+              child: Text(
+                AppString.forgotPasswordText,
+                style: TextStyle(
+                  color: AppColors.forgotTextColor,
+                  fontSize: 12,
                 ),
               ),
-            ],
-          ),
+            ),
+
+            const SizedBox(height: 20),
+
+            /// Login Button
+            SizedBox(
+              width: double.infinity,
+              height: 48,
+              child: ElevatedButton(
+                onPressed: moveToSignUpScreen,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.themeColor,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                child: Text(
+                  AppString.loginText,
+                  style: const TextStyle(fontSize: 16, color: Colors.white),
+                ),
+              ),
+            ),
+
+            const SizedBox(height: 20),
+
+            /// Google Login
+            buildContinueWithGoogleSection(context),
+
+            const SizedBox(height: 20),
+
+            /// Create Account Text
+            buildRichText(),
+
+            const SizedBox(height: 30),
+          ],
         ),
       ),
     );
   }
 
+  // ---------------- USER ROLE -----------------
+
   Column buildUserRoleSection() {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            InkWell(
-              onTap: () {
-                setState(() {
-                  selectedText = "STUDENT";
-                });
-              },
+            /// Student
+            GestureDetector(
+              onTap: () => setState(() => selectedText = "STUDENT"),
               child: Text(
                 "Student",
                 style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
                   color: selectedText == "STUDENT"
                       ? AppColors.themeColor
                       : AppColors.blackColor,
                 ),
               ),
             ),
-            SizedBox(width: 20),
-            InkWell(
-              onTap: () {
-                selectedText = "TEACHER";
-                setState(() {});
-              },
+
+            const SizedBox(width: 20),
+
+            /// Teacher
+            GestureDetector(
+              onTap: () => setState(() => selectedText = "TEACHER"),
               child: Text(
                 "Teacher",
                 style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
                   color: selectedText == "TEACHER"
                       ? AppColors.themeColor
                       : AppColors.blackColor,
@@ -123,18 +140,23 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ],
         ),
-        SizedBox(height: 4),
+
+        const SizedBox(height: 5),
+
+        /// Indicator Lines
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
+            AnimatedContainer(
+              duration: const Duration(milliseconds: 300),
               height: 2,
               width: 60,
               color: selectedText == "STUDENT"
                   ? AppColors.themeColor
                   : AppColors.dividerColor,
             ),
-            Container(
+            AnimatedContainer(
+              duration: const Duration(milliseconds: 300),
               height: 2,
               width: 60,
               color: selectedText == "TEACHER"
@@ -147,33 +169,50 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
+  // ---------------- INPUT SECTION -----------------
+
   Column buildInputSection(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(AppString.emailText, style: Theme.of(context).textTheme.labelSmall),
-        Card(
-          color: Colors.white,
-          elevation: 0,
-          child: TextFormField(
-            decoration: InputDecoration(
-              hintText: "johndoe@gmail.com",
-              hintStyle: TextStyle(fontSize: 12),
+        
+        /// Email Label
+        Text(AppString.emailText,
+            style: Theme.of(context).textTheme.labelSmall),
+
+        const SizedBox(height: 4),
+
+        /// Email Field
+        TextFormField(
+          decoration: InputDecoration(
+            hintText: "example@gmail.com",
+            filled: true,
+            fillColor: Colors.white,
+            contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
             ),
           ),
         ),
 
-        SizedBox(height: 4),
+        const SizedBox(height: 15),
 
-        Text(AppString.passwordText, style: Theme.of(context).textTheme.labelSmall),
-        Card(
-          color: Colors.white,
-          elevation: 0,
-          child: TextFormField(
-            obscureText: true,
-            decoration: InputDecoration(
-              hintText: "password",
-              hintStyle: TextStyle(fontSize: 12),
+        /// Password Label
+        Text(AppString.passwordText,
+            style: Theme.of(context).textTheme.labelSmall),
+
+        const SizedBox(height: 4),
+
+        /// Password Field
+        TextFormField(
+          obscureText: true,
+          decoration: InputDecoration(
+            hintText: "••••••••",
+            filled: true,
+            fillColor: Colors.white,
+            contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
             ),
           ),
         ),
@@ -181,54 +220,63 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
+  // ---------------- GOOGLE LOGIN -----------------
+
   Container buildContinueWithGoogleSection(BuildContext context) {
     return Container(
-      height: 56,
-      width: 390,
+      height: 50,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
         color: AppColors.googleButtonColor,
       ),
 
-      child: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(Icons.circle),
-            Text(
-              "Login With Google",
-              style: Theme.of(context).textTheme.bodySmall,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  RichText buildRichText() {
-    return RichText(
-      textAlign: TextAlign.center,
-      text: TextSpan(
-        text: AppString.newToLearnNovaText,
-        style: TextStyle(color: Colors.black, fontSize: 12),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          TextSpan(
-            text: AppString.createAccountText,
-            style: TextStyle(
-              fontSize: 12,
-              color: Colors.blue,
-              fontWeight: FontWeight.bold,
-            ),
-
-            recognizer: TapGestureRecognizer()..onTap = () {},
+          const Icon(Icons.g_mobiledata, size: 28),
+          const SizedBox(width: 8),
+          Text(
+            "Login With Google",
+            style: Theme.of(context).textTheme.bodySmall,
           ),
         ],
       ),
     );
   }
-  
-  
-  void moveToSignUpScreen(){
-    Navigator.push(context, MaterialPageRoute(builder: (context)=>SignUpScreen()));
+
+  // ---------------- SIGNUP TEXT -----------------
+
+  RichText buildRichText() {
+    return RichText(
+      text: TextSpan(
+        text: AppString.newToLearnNovaText,
+        style: const TextStyle(color: Colors.black, fontSize: 12),
+
+        children: [
+          TextSpan(
+            text: AppString.createAccountText,
+            style: const TextStyle(
+              fontSize: 12,
+              color: Colors.blue,
+              fontWeight: FontWeight.bold,
+            ),
+            recognizer: TapGestureRecognizer()
+              ..onTap = () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const SignUpScreen()),
+                );
+              },
+          ),
+        ],
+      ),
+    );
+  }
+
+  void moveToSignUpScreen() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const SignUpScreen()),
+    );
   }
 }

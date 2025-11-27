@@ -2,9 +2,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:learn_nova/Utils/AppColors/app_colors.dart';
 import 'package:learn_nova/Utils/AppString/app_string.dart';
-import 'package:learn_nova/View/Screens/AuthScreens/sign_up_screen.dart';
-import 'package:learn_nova/View/Screens/Bottom_Nav_Screens/main_bottom_nav_screen.dart';
 import 'package:learn_nova/View/Screens/profile_survey_screeen.dart';
+import 'package:learn_nova/View/Screens/AuthScreens/login_screen.dart';
 import 'package:learn_nova/View/Widget/app_bar.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -27,57 +26,38 @@ class _SignUpScreenState extends State<SignUpScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SizedBox(height: 30),
-                  Align(
-                    alignment: Alignment.center,
-                    child: Text(AppString.createAccountText,
-                      style: TextStyle(
-                        color: AppColors.blackColor,
-                        fontSize: 18,
-                      ),
-                    ),
+              const SizedBox(height: 30),
+
+              Center(
+                child: Text(
+                  AppString.createAccountText,
+                  style: TextStyle(
+                    color: AppColors.blackColor,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600,
                   ),
-                ],
+                ),
               ),
 
-              SizedBox(height: 10),
+              const SizedBox(height: 14),
 
               buildUserRoleSection(),
+              const SizedBox(height: 14),
 
               buildInputSection(context),
 
-              Align(
-                alignment: Alignment.center,
-                child: Column(
-                  children: [
+              const SizedBox(height: 20),
 
-                    Align(
-                      alignment:Alignment.centerRight,
-                      child: Text(
-                        AppString.forgotPasswordText,
-                        textAlign: TextAlign.right,
-                        style: TextStyle(
-                          color: AppColors.forgotTextColor,
-                          fontSize: 12,
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 15),
-
-                    ElevatedButton(onPressed: () {
-                      onTapSignUpButton();
-                    }, child: Text(AppString.signUuText)),
-
-                    SizedBox(height: 10),
-
-
-                    buildRichText(),
-                  ],
+              Center(
+                child: ElevatedButton(
+                  onPressed: onTapSignUpButton,
+                  child: Text(AppString.signUuText),
                 ),
               ),
+
+              SizedBox(height: 30),
+
+              Center(child: buildRichText()),
             ],
           ),
         ),
@@ -85,147 +65,145 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
+  // -------------------------------
+  // ROLE SWITCH SECTION
+  // -------------------------------
   Column buildUserRoleSection() {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            InkWell(
-              onTap: () {
-                setState(() {
-                  selectedText = "STUDENT";
-                });
-              },
-              child: Text(
-                "Student",
-                style: TextStyle(
-                  color: selectedText == "STUDENT"
-                      ? AppColors.themeColor
-                      : AppColors.blackColor,
-                ),
-              ),
-            ),
-            SizedBox(width: 20),
-            InkWell(
-              onTap: () {
-                selectedText = "TEACHER";
-                setState(() {});
-              },
-              child: Text(
-                "Teacher",
-                style: TextStyle(
-                  color: selectedText == "TEACHER"
-                      ? AppColors.themeColor
-                      : AppColors.blackColor,
-                ),
-              ),
-            ),
+            roleText("STUDENT"),
+            const SizedBox(width: 25),
+            roleText("TEACHER"),
           ],
         ),
-        SizedBox(height: 4),
+        const SizedBox(height: 4),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              height: 2,
-              width: 60,
-              color: selectedText == "STUDENT"
-                  ? AppColors.themeColor
-                  :AppColors.dividerColor,
-            ),
-            Container(
-              height: 2,
-              width: 60,
-              color: selectedText == "TEACHER"
-                  ? AppColors.themeColor
-                  : AppColors.dividerColor,
-            ),
-          ],
+          children: [roleIndicator("STUDENT"), roleIndicator("TEACHER")],
         ),
       ],
     );
   }
 
+  Widget roleText(String role) {
+    return InkWell(
+      onTap: () {
+        setState(() {
+          selectedText = role;
+        });
+      },
+      child: Text(
+        role[0] + role.substring(1).toLowerCase(), // Student / Teacher
+        style: TextStyle(
+          color: selectedText == role
+              ? AppColors.themeColor
+              : AppColors.blackColor,
+          fontSize: 16,
+          fontWeight: FontWeight.w500,
+        ),
+      ),
+    );
+  }
+
+  Widget roleIndicator(String role) {
+    return Container(
+      height: 2.2,
+      width: 65,
+      color: selectedText == role
+          ? AppColors.themeColor
+          : AppColors.dividerColor,
+    );
+  }
+
+  // -------------------------------
+  // INPUT FIELDS
+  // -------------------------------
   Column buildInputSection(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(AppString.emailText, style: Theme.of(context).textTheme.labelSmall),
-        Card(
-          color: Colors.white,
-          elevation: 0,
-          child: TextFormField(
-            decoration: InputDecoration(
-              hintText: "johndoe@gmail.com",
-              hintStyle: TextStyle(fontSize: 12),
-            ),
-          ),
-        ),
+        label(AppString.emailText),
+        inputField("johndoe@gmail.com"),
 
-        SizedBox(height: 4),
+        const SizedBox(height: 6),
 
-        Text(AppString.passwordText, style: Theme.of(context).textTheme.labelSmall),
-        Card(
-          color: Colors.white,
-          elevation: 0,
-          child: TextFormField(
-            obscureText: true,
-            decoration: InputDecoration(
-              hintText: "password",
-              hintStyle: TextStyle(fontSize: 12),
-            ),
-          ),
-        ),
+        label(AppString.passwordText),
+        inputField("password", obscure: true),
 
+        const SizedBox(height: 6),
 
-        Text(AppString.confirmPasswordText, style: Theme.of(context).textTheme.labelSmall),
-        Card(
-          color: Colors.white,
-          elevation: 0,
-          child: TextFormField(
-            obscureText: true,
-            decoration: InputDecoration(
-              hintText: "confirm password",
-              hintStyle: TextStyle(fontSize: 12),
-            ),
-          ),
-        ),
-
-
-
+        label(AppString.confirmPasswordText),
+        inputField("confirm password", obscure: true),
       ],
     );
   }
 
+  Widget label(String text) {
+    return Text(
+      text,
+      style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
+    );
+  }
 
+  Widget inputField(String hint, {bool obscure = false}) {
+    return Card(
+      elevation: 0,
+      color: Colors.white,
+      child: TextFormField(
+        obscureText: obscure,
+        decoration: InputDecoration(
+          hintText: hint,
+          hintStyle: const TextStyle(fontSize: 12),
+          border: InputBorder.none,
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 10,
+            vertical: 12,
+          ),
+        ),
+      ),
+    );
+  }
 
+  // -------------------------------
+  // LOGIN REDIRECT TEXT
+  // -------------------------------
   RichText buildRichText() {
     return RichText(
-      textAlign: TextAlign.center,
       text: TextSpan(
-        text: AppString.alreadyHaveAnAccountText,
-        style: TextStyle(color: Colors.black, fontSize: 12),
+        text: AppString.newToLearnNovaText,
+        style: const TextStyle(color: Colors.black, fontSize: 12),
+
         children: [
           TextSpan(
-            text: AppString.createAccountText,
-            style: TextStyle(
+            text: AppString.loginText,
+            style: const TextStyle(
               fontSize: 12,
               color: Colors.blue,
               fontWeight: FontWeight.bold,
             ),
-
-            recognizer: TapGestureRecognizer()..onTap = () {},
+            recognizer: TapGestureRecognizer()
+              ..onTap = () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const LoginScreen()),
+                );
+              },
           ),
         ],
       ),
     );
   }
 
-  void onTapSignUpButton(){
-    Navigator.push(context, MaterialPageRoute(builder: (context)=>SurveyScreenContent()));
+  // -------------------------------
+  // SIGNUP BUTTON ACTION
+  // -------------------------------
+  void onTapSignUpButton() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => SurveyScreenContent()),
+    );
   }
-  
-
 }

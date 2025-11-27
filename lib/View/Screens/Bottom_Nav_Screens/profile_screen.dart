@@ -8,17 +8,19 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+         backgroundColor: Colors.white,
       body: SafeArea(
         child: ListView(
-          children: <Widget>[
-            const ProfileHeader(),
+          padding: const EdgeInsets.only(bottom: 20),
+          children: const [
+            ProfileHeader(),
 
-            const Padding(
+            Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
               child: StatsSection(),
             ),
 
-            const Padding(
+            Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
               child: Text(
                 'My Courses',
@@ -30,19 +32,18 @@ class ProfileScreen extends StatelessWidget {
               ),
             ),
 
-            const CourseCard(
+            CourseCard(
               courseTitle: 'English Tenses',
               level: 'Intermediate',
               instructorName: 'Denisa Ozel',
               timeAgo: '32 mins ago',
             ),
-            const CourseCard(
-              courseTitle: 'English Tenses',
-              level: 'Intermediate',
-              instructorName: 'Denisa Ozel',
-              timeAgo: '32 mins ago',
+            CourseCard(
+              courseTitle: 'Spoken English',
+              level: 'Beginner',
+              instructorName: 'Mark Leo',
+              timeAgo: '1 hour ago',
             ),
-            const SizedBox(height: 20),
           ],
         ),
       ),
@@ -57,13 +58,19 @@ class ProfileHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        /// Header Row
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              IconButton(icon: const Icon(Icons.arrow_back), onPressed: () {}),
+            children: [
+              /// Back Button
+              IconButton(
+                icon: const Icon(Icons.arrow_back),
+                onPressed: () => Navigator.pop(context),
+              ),
 
+              /// Settings button
               IconButton(
                 icon: const Icon(Icons.settings_outlined),
                 onPressed: () {},
@@ -72,24 +79,26 @@ class ProfileHeader extends StatelessWidget {
           ),
         ),
 
+        /// Profile Image
         const CircleAvatar(
-          radius: 40,
+          radius: 45,
           backgroundImage: AssetImage('assets/images/image5.png'),
-          backgroundColor: Colors.grey,
         ),
 
-        const SizedBox(height: 10),
+        const SizedBox(height: 12),
 
-        // Name
+        /// User Name
         const Text(
           'Jessica Roy',
           style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
         ),
 
+        /// Join Date
         const Text(
           'Joined Since - Jun 2024',
           style: TextStyle(fontSize: 14, color: Colors.grey),
         ),
+
         const SizedBox(height: 20),
       ],
     );
