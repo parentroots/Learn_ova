@@ -16,9 +16,9 @@ class AppRoute {
 
 
   static List<GetPage> routes = [
+    
     ///==================== Authentication  Routes ====================
-
-
+    
     GetPage(name: signUpScreen, page: () => const SignUpScreen()),
     GetPage(name: loginScreen, page: () => const LoginScreen()),
     GetPage(name: mainBottomNavScreen, page: () => const MainBottomNavScreen()),
