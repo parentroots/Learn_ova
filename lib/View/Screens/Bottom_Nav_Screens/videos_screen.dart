@@ -89,6 +89,7 @@ class _VideosScreenState extends State<VideosScreen> {
                       },
                       child: Container(
                         height: 30,
+                        
                         width: 40,
                         decoration: BoxDecoration(
                           color: cameraIsOnTap
