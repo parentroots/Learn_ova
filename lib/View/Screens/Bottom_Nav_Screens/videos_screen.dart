@@ -22,6 +22,7 @@ class _VideosScreenState extends State<VideosScreen> {
           fit: BoxFit.cover,
           'assets/images/image5.png',
         ),
+        
 
         Align(
           alignment: Alignment.bottomLeft,
